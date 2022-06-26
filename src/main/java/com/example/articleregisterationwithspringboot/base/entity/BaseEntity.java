@@ -12,5 +12,6 @@ public class BaseEntity<PK extends Serializable> implements Serializable {
 
     public PK getId(){
         return id;
+
     }
 }
