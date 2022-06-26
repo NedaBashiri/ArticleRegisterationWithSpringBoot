@@ -13,9 +13,6 @@ public class BaseServiceImpl<E extends BaseEntity, PK extends Serializable, Repo
 
     protected Repository baseRepository;
 
-    public BaseServiceImpl(Repository baseRepository) {
-        this.baseRepository = baseRepository;
-    }
 
     @Override
     public E save(E e) {
