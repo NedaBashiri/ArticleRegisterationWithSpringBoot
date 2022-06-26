@@ -18,5 +18,5 @@ public interface BaseRepository <E, PK extends Serializable>{
 
     void deleteById(PK id);
 
-    void deleteAll();
+
 }
