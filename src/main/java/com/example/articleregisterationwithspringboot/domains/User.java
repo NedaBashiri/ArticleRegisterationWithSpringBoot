@@ -1,4 +1,4 @@
-package com.example.articleregisterationwithspringboot.base.domains;
+package com.example.articleregisterationwithspringboot.domains;
 
 import com.example.articleregisterationwithspringboot.base.entity.BaseEntity;
 
