@@ -1,11 +1,10 @@
 package com.example.articleregisterationwithspringboot.service.impl;
 
 import com.example.articleregisterationwithspringboot.base.service.impl.BaseServiceImpl;
+import com.example.articleregisterationwithspringboot.service.UserService;
 import com.example.articleregisterationwithspringboot.domains.User;
 import com.example.articleregisterationwithspringboot.repository.UserRepository;
-import com.example.articleregisterationwithspringboot.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 @Service
