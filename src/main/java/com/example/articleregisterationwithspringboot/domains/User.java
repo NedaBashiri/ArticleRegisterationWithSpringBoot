@@ -1,6 +1,7 @@
 package com.example.articleregisterationwithspringboot.domains;
 
 import com.example.articleregisterationwithspringboot.base.entity.BaseEntity;
+import com.example.articleregisterationwithspringboot.exception.InValidDataException;
 
 import javax.persistence.*;
 
@@ -53,7 +54,10 @@ public class User extends BaseEntity<Long> {
         return userName;
     }
 
-    public void setUserName(String userName) {
+    public void setUserName(String userName) throws InValidDataException {
+        if (!userName.matches("(\\w\\d*){3,}")) {
+            throw new InValidDataException("Username");
+        }
         this.userName = userName;
     }
 
@@ -61,7 +65,10 @@ public class User extends BaseEntity<Long> {
         return nationalCode;
     }
 
-    public void setNationalCode(String nationalCode) {
+    public void setNationalCode(String nationalCode) throws InValidDataException {
+        if (!nationalCode.matches("\\d{10}")) {
+            throw new InValidDataException("National Code");
+        }
         this.nationalCode = nationalCode;
     }
 
@@ -77,7 +84,10 @@ public class User extends BaseEntity<Long> {
         return password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(String password) throws InValidDataException {
+        if (!password.matches("[a-zA-Z0-9]{3,}")) {
+            throw new InValidDataException("Password");
+        }
         this.password = password;
     }
 }
