@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
+import java.util.List;
 
 
 @Repository
@@ -29,5 +30,12 @@ public class ArticleRepositoryImpl extends BaseRepositoryImpl<Article,Long> impl
         }
 
         return article;
+    }
+
+    @Override
+    public List<Article> findPublishedArticles() {
+        TypedQuery<Article> query = entityManager.createQuery("select o from Article o where o.isPublished=:x",Article.class);
+        query.setParameter("x",true);
+        return query.getResultList();
     }
 }
