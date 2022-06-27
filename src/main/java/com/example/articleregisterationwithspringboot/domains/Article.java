@@ -1,9 +1,12 @@
 package com.example.articleregisterationwithspringboot.domains;
 
 import com.example.articleregisterationwithspringboot.base.entity.BaseEntity;
+import com.example.articleregisterationwithspringboot.exception.InValidDataException;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Set;
+import java.util.TreeSet;
 
 
 @Entity
@@ -13,13 +16,29 @@ public class Article extends BaseEntity<Long> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable = false, unique = true)
     private String title;
+
+    @Column(nullable = false, columnDefinition = "text")
     private String brief;
+
+    @Column(nullable = false, columnDefinition = "text")
     private String content;
+
+    @Column(updatable = false, nullable = false)
     private LocalDate Date;
 
-    @Column(name = "is_published")
+    @Column(name = "is_published",nullable = false)
     private boolean isPublished;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinTable(name = "article_user", joinColumns = {@JoinColumn(name = "article_id")}, inverseJoinColumns = {@JoinColumn(name = "user_id")})
+    private User user;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "article_category", joinColumns = {@JoinColumn(name = "article_id")}, inverseJoinColumns = {@JoinColumn(name = "category_id")})
+    private Set<Category> categories = new TreeSet<>();
 
     public Article() {
     }
@@ -55,7 +74,10 @@ public class Article extends BaseEntity<Long> {
         return title;
     }
 
-    public void setTitle(String title) {
+    public void setTitle(String title) throws InValidDataException {
+        if (!title.matches("[a-zA-Z\\s.,&\\d\\(\\)]{5,}")) {
+            throw new InValidDataException("Title");
+        }
         this.title = title;
     }
 
@@ -63,7 +85,10 @@ public class Article extends BaseEntity<Long> {
         return brief;
     }
 
-    public void setBrief(String brief) {
+    public void setBrief(String brief) throws InValidDataException {
+        if (brief.length() < 10) {
+            throw new InValidDataException("Brief");
+        }
         this.brief = brief;
     }
 
@@ -71,7 +96,10 @@ public class Article extends BaseEntity<Long> {
         return content;
     }
 
-    public void setContent(String content) {
+    public void setContent(String content) throws InValidDataException {
+        if (content.length() < 10) {
+            throw new InValidDataException("Content");
+        }
         this.content = content;
     }
 
@@ -89,5 +117,21 @@ public class Article extends BaseEntity<Long> {
 
     public void setPublished(boolean published) {
         isPublished = published;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Set<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(Set<Category> categories) {
+        this.categories = categories;
     }
 }
