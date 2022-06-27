@@ -7,6 +7,8 @@ import com.example.articleregisterationwithspringboot.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ArticleServiceImpl extends BaseServiceImpl<Article, Long, ArticleRepository> implements ArticleService {
 
@@ -16,5 +18,10 @@ public class ArticleServiceImpl extends BaseServiceImpl<Article, Long, ArticleRe
     @Override
     public Article findByTitle(String title) {
         return articleRepository.findByTitle(title);
+    }
+
+    @Override
+    public List<Article> findPublishedArticles() {
+        return articleRepository.findPublishedArticles();
     }
 }
