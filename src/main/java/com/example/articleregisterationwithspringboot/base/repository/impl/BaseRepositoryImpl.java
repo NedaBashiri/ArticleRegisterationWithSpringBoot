@@ -2,17 +2,21 @@ package com.example.articleregisterationwithspringboot.base.repository.impl;
 
 import com.example.articleregisterationwithspringboot.base.entity.BaseEntity;
 import com.example.articleregisterationwithspringboot.base.repository.BaseRepository;
+import org.springframework.stereotype.Repository;
 
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import java.io.Serializable;
 
 import java.util.Collection;
 import java.util.List;
 
+@Repository(value = "baseRepository")
 public class BaseRepositoryImpl <E extends BaseEntity<PK>,PK extends Serializable> implements BaseRepository<E,PK> {
 
+    @PersistenceContext
     EntityManager entityManager;
 
     private Class<E> clazz;
