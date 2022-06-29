@@ -8,12 +8,13 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
+import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
-@Repository
+@Repository("userRepository")
 public class UserRepositoryImpl extends BaseRepositoryImpl<User,Long> implements UserRepository {
 
-    @Autowired
+    @PersistenceContext
     EntityManager entityManager;
 
     @Override

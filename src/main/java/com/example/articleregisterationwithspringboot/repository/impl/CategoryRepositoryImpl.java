@@ -8,12 +8,13 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
+import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
-@Repository
+@Repository("categoryRepository")
 public class CategoryRepositoryImpl extends BaseRepositoryImpl<Category,Long> implements CategoryRepository {
 
-    @Autowired
+    @PersistenceContext
     EntityManager entityManager;
 
 
