@@ -9,10 +9,6 @@ import javax.persistence.*;
 @Table(name = "tb_user")
 public class User extends BaseEntity<Long> {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
     @Column(name = "username")
     private String userName;
 
@@ -30,24 +26,6 @@ public class User extends BaseEntity<Long> {
         this.nationalCode = nationalCode;
         this.birthday = birthday;
         this.password = password;
-    }
-
-    public User(Long id, String userName, String nationalCode, String birthday, String password) {
-        this.id = id;
-        this.userName = userName;
-        this.nationalCode = nationalCode;
-        this.birthday = birthday;
-        this.password = password;
-    }
-
-    @Override
-    public Long getId() {
-        return id;
-    }
-
-    @Override
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getUserName() {

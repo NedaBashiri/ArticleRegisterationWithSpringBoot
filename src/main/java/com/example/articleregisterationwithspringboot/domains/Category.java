@@ -9,9 +9,6 @@ import javax.persistence.*;
 @Table(name = "tb_category")
 public class Category extends BaseEntity<Long> {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
     private String title;
     private String description;
 
@@ -21,22 +18,6 @@ public class Category extends BaseEntity<Long> {
     public Category(String title, String description) {
         this.title = title;
         this.description = description;
-    }
-
-    public Category(Long id, String title, String description) {
-        this.id = id;
-        this.title = title;
-        this.description = description;
-    }
-
-    @Override
-    public Long getId() {
-        return id;
-    }
-
-    @Override
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getTitle() {

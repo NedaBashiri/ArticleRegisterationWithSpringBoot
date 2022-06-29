@@ -13,10 +13,6 @@ import java.util.TreeSet;
 @Table(name = "tb_article")
 public class Article extends BaseEntity<Long> {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
     @Column(nullable = false, unique = true)
     private String title;
 
@@ -49,25 +45,6 @@ public class Article extends BaseEntity<Long> {
         this.content = content;
         Date = date;
         this.isPublished = isPublished;
-    }
-
-    public Article(Long id, String title, String brief, String content, LocalDate date, boolean isPublished) {
-        this.id = id;
-        this.title = title;
-        this.brief = brief;
-        this.content = content;
-        Date = date;
-        this.isPublished = isPublished;
-    }
-
-    @Override
-    public Long getId() {
-        return id;
-    }
-
-    @Override
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getTitle() {
