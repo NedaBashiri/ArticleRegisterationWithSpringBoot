@@ -10,11 +10,11 @@ public interface BaseService <E, PK extends Serializable>{
 
     E update(E e);
 
-    E findById(PK id);
+    E findById(Class<E> eClass,PK id);
 
-    void deleteById(PK id);
+    void deleteById(E e);
 
-    List<E> findAll();
+    List<E> findAll(Class<E> eClass);
 
     List<E> findAllByIdsIn(Collection<PK> ids);
 }
