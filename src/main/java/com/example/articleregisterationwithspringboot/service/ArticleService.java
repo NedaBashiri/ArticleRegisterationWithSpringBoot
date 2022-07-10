@@ -10,4 +10,6 @@ public interface ArticleService extends BaseService<Article,Long> {
     Article findByTitle(String title);
 
     List<Article> findPublishedArticles();
+
+    List<Article> findByUserName(String userName);
 }
