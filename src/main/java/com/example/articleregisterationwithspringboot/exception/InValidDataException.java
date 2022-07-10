@@ -1,12 +1,18 @@
 package com.example.articleregisterationwithspringboot.exception;
 
-public final class InValidDataException extends Exception {
+public final class InValidDataException extends RuntimeException {
 
-    public InValidDataException(String message) {
+    private static final long serialVersionUID = 1L;
+
+    public InValidDataException() {
+        super();
+    }
+
+    public InValidDataException(final String message) {
         super(message);
     }
 
-    public InValidDataException(String message, Exception e) {
-        super(message, e);
+    public InValidDataException(final String message, final Throwable cause) {
+        super(message, cause);
     }
 }
