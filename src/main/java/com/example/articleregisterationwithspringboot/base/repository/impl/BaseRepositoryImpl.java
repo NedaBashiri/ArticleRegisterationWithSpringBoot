@@ -5,6 +5,7 @@ import com.example.articleregisterationwithspringboot.base.repository.BaseReposi
 import org.springframework.stereotype.Repository;
 
 
+import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -14,13 +15,10 @@ import java.util.Collection;
 import java.util.List;
 
 @Repository(value = "baseRepository")
-public class BaseRepositoryImpl <E extends BaseEntity<PK>,PK extends Serializable> implements BaseRepository<E,PK> {
+public class BaseRepositoryImpl<E extends BaseEntity<PK>, PK extends Serializable> implements BaseRepository<E, PK> {
 
     @PersistenceContext
     EntityManager entityManager;
-
-    private Class<E> clazz;
-
 
     @Override
     public E save(E e) {
@@ -35,13 +33,13 @@ public class BaseRepositoryImpl <E extends BaseEntity<PK>,PK extends Serializabl
     }
 
     @Override
-    public E findById(PK id) {
-        return entityManager.find(clazz, id);
+    public E findById(Class<E> eClass, PK id) {
+        return entityManager.find(eClass, id);
     }
 
     @Override
-    public List<E> findAll() {
-        TypedQuery<E> query = entityManager.createQuery("select o from"+clazz.getSimpleName()+"o",clazz);
+    public List<E> findAll(Class<E> eClass) {
+        TypedQuery<E> query = entityManager.createQuery("select o from" + eClass.getAnnotation(Entity.class).name() + "o", eClass);
         return query.getResultList();
     }
 
@@ -52,7 +50,8 @@ public class BaseRepositoryImpl <E extends BaseEntity<PK>,PK extends Serializabl
     }
 
     @Override
-    public void deleteById(PK id) {
-        entityManager.remove(entityManager.getReference(clazz,id));
+    public void deleteById(E e) {
+        e = entityManager.merge(e);
+        entityManager.remove(e);
     }
 }
