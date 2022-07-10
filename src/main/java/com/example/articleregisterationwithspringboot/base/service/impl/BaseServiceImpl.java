@@ -29,18 +29,18 @@ public class BaseServiceImpl<E extends BaseEntity, PK extends Serializable, Repo
     }
 
     @Override
-    public E findById(PK id) {
-        return baseRepository.findById(id);
+    public E findById(Class<E> eClass,PK id) {
+        return baseRepository.findById(eClass,id);
     }
 
     @Override
-    public void deleteById(PK id) {
-        baseRepository.deleteById(id);
+    public void deleteById(E e) {
+        baseRepository.deleteById(e);
     }
 
     @Override
-    public List<E> findAll() {
-        return baseRepository.findAll();
+    public List<E> findAll(Class<E> eClass) {
+        return baseRepository.findAll(eClass);
     }
 
     @Override
