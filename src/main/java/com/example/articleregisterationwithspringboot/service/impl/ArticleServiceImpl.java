@@ -28,4 +28,9 @@ public class ArticleServiceImpl extends BaseServiceImpl<Article, Long, ArticleRe
     public List<Article> findPublishedArticles() {
         return articleRepository.findPublishedArticles();
     }
+
+    @Override
+    public List<Article> findByUserName(String userName) {
+        return articleRepository.findByUserName(userName);
+    }
 }
