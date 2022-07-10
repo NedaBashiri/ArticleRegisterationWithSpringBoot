@@ -1,0 +1,58 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>sign-up</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../static/css/style.css" th:href="@{/css/style.css}">
+    <link rel="stylesheet" href="../static/css/home.css" th:href="@{/css/home.css}">
+
+
+</head>
+<body>
+
+<div th:include="fragments/header.html :: header"/>
+
+<h1 th:text="${msg}" class="singup">welcome</h1>
+
+<div class="container">
+    <div class="box">
+        <!--<p th:if="${param.error}" class="text-danger" style="color: white">اطلاعات کاربری نامعتبر یا در انتظار تایید
+            میباشد!</p>-->
+      <br><br>
+        <h2 class="singUp"> Sing up </h2>
+        <form class="login-form" action="#" th:action="@{/user/signup}" th:object="${user}" method="post">
+
+            <div class="field">
+                <input id="username" type="text" th:field="*{userName}"  placeholder="username" name="username" required/>
+                <label for="username">Username</label>
+                <span th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}" style="color: black"/>
+            </div>
+
+            <div class="field">
+                <input id="National" type="text" th:field="*{nationalCode}"  placeholder=" National" name="National"  required/>
+                <label for="National">National Cod</label>
+                <span th:if="${#fields.hasErrors('nationalCode')}" th:errors="*{nationalCode}" style="color: black"/>
+            </div>
+            <div class="field">
+<!--
+                type="date" th:field ="*{brithday}"
+-->
+                <input id="brithday" type="date" th:field ="*{birthdate}"  placeholder="brithday" name="brithday" required/>
+                <label for="brithday">BrithDay</label>
+            </div>
+            <div class="field">
+                <input id="password" type="name" placeholder="password" name="password" required/>
+                <label for="password">Password</label>
+                <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" style="color: black"/>
+            </div>
+            <button class="login-button" title="login">Sign Up</button>
+        </form>
+    </div>
+    <div class="box">
+        <p>have an account? <a class="signup" href="login">log in</a></p>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>show-article</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../static/css/style.css" th:href="@{/css/style.css}">
+    <link rel="stylesheet" href="../static/css/home.css" th:href="@{/css/home.css}">
+
+
+</head>
+<body>
+
+<div th:include="fragments/header.html :: header"/>
+
+<div class="container mt-5">
+    <h2 align="center">Article</h2>
+    <table class="customers">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>title</th>
+            <th>brief</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="l : ${articles}" th:field="${l}">
+            <td th:text="${l.id}"></td>
+            <td th:text="${l.title}"></td>
+            <td th:text="${l.brief}"></td>
+            <td>
+                <a th:href="@{/user/see/{id}(id=${l.id})}" >see all</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

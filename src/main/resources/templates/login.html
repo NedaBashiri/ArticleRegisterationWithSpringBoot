@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>login</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../static/css/style.css" th:href="@{/css/style.css}">
+    <link rel="stylesheet" href="../static/css/home.css" th:href="@{/css/home.css}">
+
+
+</head>
+<body>
+<div th:include="fragments/header.html :: header"/>
+<div class="container">
+    <div class="box">
+
+        <br>
+        <form class="login-form" action="#" th:action="@{/user/login}" th:object="${user}" method="post">
+            <div class="field">
+                <input id="username" type="text"   placeholder="username" name="userName" required/>
+                <label for="username">username</label>
+            </div>
+            <div class="field">
+                <input id="password" type="password" placeholder="password"  name="password" required />
+                <label for="password">Password</label>
+            </div>
+            <button class="login-button" title="login">Log In</button>
+            <div class="separator">
+                <div class="line"></div>
+                <p>OR</p>
+                <div class="line"></div>
+            </div>
+            <div class="other">
+                <button class="fb-login-btn" type="button">
+                    <i class="fa fa-facebook-official fb-icon"></i>
+                    <span class="">Log in with Facebook</span>
+                </button>
+                <a class="forgot-password" href="#">Forgot password?</a>
+            </div>
+        </form>
+    </div>
+    <div class="box">
+        <p>Don't have an account? <a class="signup" href="signup">Sign Up</a></p>
+    </div>
+</div>
+
+</body>
+</html>

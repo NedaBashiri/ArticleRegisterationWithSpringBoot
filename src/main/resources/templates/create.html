@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>create article</title>
+    <link rel="stylesheet" href="../static/css/article.css" th:href="@{/css/article.css}">
+
+</head>
+<body>
+<h1 th:text="${msg}" class="singup"></h1>
+<div class="container">
+    <form id="contact" action="#" th:action="@{/user/create}" th:object="${article}" method="post">
+        <h1> Article Registration</h1>
+        <h3>Fill the form below and press the submit button!</h3>
+        <div class="row">
+            <!-- first column -->
+            <div class="column">
+                <fieldset>
+                    <input type="text" th:field="*{title}" placeholder="title *" name="title" required autofocus>
+                    <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}" style="color: black"/>
+                </fieldset>
+                <fieldset>
+                    <input type="text" th:field="*{brief}" placeholder="brief *" name="brief" required autofocus>
+                    <span th:if="${#fields.hasErrors('brief')}" th:errors="*{brief}" style="color: black"/>
+                </fieldset>
+                <fieldset>
+                    <input type="text" th:field="*{content}" placeholder="content *" name="content" required autofocus>
+                    <span th:if="${#fields.hasErrors('content')}" th:errors="*{content}" style="color: black"/>
+                </fieldset>
+            </div>
+            <!-- second column -->
+            <div class="column">
+                <fieldset>
+
+                    <input  type="checkbox" th:field="*{published}" id="isPublished">
+                    <label  for="isPublished">isPublished</label>
+
+                </fieldset>
+
+                <fieldset>
+                    <label>Enter Category </label>
+                    <div >
+                        <input type="text" th:field="*{category.title}" name="title"  placeholder="title Category"/>
+                        <input type="text" th:field="*{category.description}" name="description"  placeholder="description Category"/>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+        <!-- submit button -->
+        <fieldset>
+            <button type="submit" id="button">Submit Now</button>
+        </fieldset>
+    </form>
+</div>
+
+</body>
+</html>

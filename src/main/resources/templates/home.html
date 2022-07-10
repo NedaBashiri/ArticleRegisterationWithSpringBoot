@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Home</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../static/css/home.css" th:href="@{/css/home.css}">
+</head>
+<body>
+
+<div th:include="fragments/header.html :: header"/>
+
+<div class="MyContent">
+    <h2>Welcome to website Article Registration</h2>
+    <main>
+        <div class="ghost-center">
+            <br>
+            <li><a href="show">Show Articles</a></li>
+            <br>
+            <li><a href="signup">Sign Up</a></li>
+            <br>
+            <li><a href="login">Login</a></li>
+
+        </div>
+    </main>
+</div>
+
+</body>
+</html>
