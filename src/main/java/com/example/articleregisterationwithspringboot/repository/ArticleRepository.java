@@ -10,4 +10,6 @@ public interface ArticleRepository extends BaseRepository<Article,Long> {
     Article findByTitle(String title);
 
     List<Article> findPublishedArticles();
+
+    List<Article> findByUserName(String userName);
 }
