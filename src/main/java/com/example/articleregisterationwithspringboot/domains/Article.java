@@ -1,12 +1,10 @@
 package com.example.articleregisterationwithspringboot.domains;
 
 import com.example.articleregisterationwithspringboot.base.entity.BaseEntity;
-import com.example.articleregisterationwithspringboot.exception.InValidDataException;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
-import java.util.Set;
-import java.util.TreeSet;
 
 
 @Entity
@@ -14,47 +12,47 @@ import java.util.TreeSet;
 public class Article extends BaseEntity<Long> {
 
     @Column(nullable = false, unique = true)
+    @Size(min = 5, message = " عنوان باید بیشتر از پنج کاراکتر باشد")
     private String title;
 
     @Column(nullable = false, columnDefinition = "text")
+    @Size(min = 10, message = "خلاصه باید بیشتر از ده کاراکتر باشد")
     private String brief;
 
     @Column(nullable = false, columnDefinition = "text")
+    @Size(min = 10, message = "محتوا باید بیشتر از ده کاراکتر باشد")
     private String content;
 
-    @Column(updatable = false, nullable = false)
-    private LocalDate Date;
+    @Column(name = "create_date", updatable = false, nullable = false)
+    private LocalDate createDate;
 
-    @Column(name = "is_published",nullable = false)
-    private boolean isPublished;
+    @Column(name = "published", nullable = false)
+    private boolean published;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinTable(name = "article_user", joinColumns = {@JoinColumn(name = "article_id")}, inverseJoinColumns = {@JoinColumn(name = "user_id")})
     private User user;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "article_category", joinColumns = {@JoinColumn(name = "article_id")}, inverseJoinColumns = {@JoinColumn(name = "category_id")})
     private Category category;
 
     public Article() {
     }
 
-    public Article(String title, String brief, String content, LocalDate date, boolean isPublished) {
+    public Article(String title, String brief, String content, LocalDate createDate, boolean published) {
         this.title = title;
         this.brief = brief;
         this.content = content;
-        Date = date;
-        this.isPublished = isPublished;
+        this.createDate = createDate;
+        this.published = published;
     }
 
     public String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) throws InValidDataException {
-        if (!title.matches("[a-zA-Z\\s.,&\\d\\(\\)]{5,}")) {
-            throw new InValidDataException("Title");
-        }
+    public void setTitle(String title) {
         this.title = title;
     }
 
@@ -62,10 +60,7 @@ public class Article extends BaseEntity<Long> {
         return brief;
     }
 
-    public void setBrief(String brief) throws InValidDataException {
-        if (brief.length() < 10) {
-            throw new InValidDataException("Brief");
-        }
+    public void setBrief(String brief) {
         this.brief = brief;
     }
 
@@ -73,27 +68,24 @@ public class Article extends BaseEntity<Long> {
         return content;
     }
 
-    public void setContent(String content) throws InValidDataException {
-        if (content.length() < 10) {
-            throw new InValidDataException("Content");
-        }
+    public void setContent(String content) {
         this.content = content;
     }
 
-    public LocalDate getDate() {
-        return Date;
+    public LocalDate getCreateDate() {
+        return createDate;
     }
 
-    public void setDate(LocalDate date) {
-        Date = date;
+    public void setCreateDate(LocalDate createDate) {
+        this.createDate = createDate;
     }
 
-    public boolean isPublished() {
-        return isPublished;
+    public boolean getPublished() {
+        return published;
     }
 
     public void setPublished(boolean published) {
-        isPublished = published;
+        this.published = published;
     }
 
     public User getUser() {

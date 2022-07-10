@@ -4,27 +4,35 @@ import com.example.articleregisterationwithspringboot.base.entity.BaseEntity;
 import com.example.articleregisterationwithspringboot.exception.InValidDataException;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.PastOrPresent;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "tb_user")
 public class User extends BaseEntity<Long> {
 
     @Column(name = "username")
+    @Size(min = 3, message = "نام باید بیشتر از دو کاراکتر باشد")
     private String userName;
 
     @Column(name = "national_code")
+    @Pattern(regexp = "[0-9]{10}", message = "کد ملی 10 رقمی است")
     private String nationalCode;
 
-    private String birthday;
+    private String birthdate;
+
+    @Min(value = 4, message = "پسورد بیشتر از 4 کاراکتر باشد")
     private String password;
 
     public User() {
     }
 
-    public User(String userName, String nationalCode, String birthday, String password) {
+    public User(String userName, String nationalCode, String birthdate, String password) {
         this.userName = userName;
         this.nationalCode = nationalCode;
-        this.birthday = birthday;
+        this.birthdate = birthdate;
         this.password = password;
     }
 
@@ -32,10 +40,7 @@ public class User extends BaseEntity<Long> {
         return userName;
     }
 
-    public void setUserName(String userName) throws InValidDataException {
-        if (!userName.matches("(\\w\\d*){3,}")) {
-            throw new InValidDataException("Username");
-        }
+    public void setUserName(String userName) {
         this.userName = userName;
     }
 
@@ -43,29 +48,23 @@ public class User extends BaseEntity<Long> {
         return nationalCode;
     }
 
-    public void setNationalCode(String nationalCode) throws InValidDataException {
-        if (!nationalCode.matches("\\d{10}")) {
-            throw new InValidDataException("National Code");
-        }
+    public void setNationalCode(String nationalCode) {
         this.nationalCode = nationalCode;
     }
 
-    public String getBirthday() {
-        return birthday;
+    public String getBirthdate() {
+        return birthdate;
     }
 
-    public void setBirthday(String birthday) {
-        this.birthday = birthday;
+    public void setBirthdate(String birthdate) {
+        this.birthdate = birthdate;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) throws InValidDataException {
-        if (!password.matches("[a-zA-Z0-9]{3,}")) {
-            throw new InValidDataException("Password");
-        }
+    public void setPassword(String password) {
         this.password = password;
     }
 }
